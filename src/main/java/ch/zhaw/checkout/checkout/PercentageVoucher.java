@@ -7,14 +7,14 @@ public class PercentageVoucher implements Voucher {
     private int discount;
 
     public PercentageVoucher(int discount) {
-
+        this.discount=discount;
     }
 
     @Override
     public double getDiscount(List<Product> products) {
-        if (discount != 0) {
-            int CHFdiscount = (int) (products.stream().mapToDouble(x-> x.getPrice()).sum()*(discount/100));
-            return discount = CHFdiscount;
+        if (products.stream().mapToDouble(x-> x.getPrice()).sum()>0) {
+            return products.stream().mapToDouble(x-> x.getPrice()).sum()*discount/100;
+            
             
         } else {
             return 0.0;
