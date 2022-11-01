@@ -2,12 +2,6 @@ package ch.zhaw.checkout.checkout;
 
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
-import org.apache.logging.log4j.message.Message;
-
-import com.fasterxml.jackson.databind.RuntimeJsonMappingException;
-
 public class PercentageVoucher implements Voucher {
 
     private int discount;

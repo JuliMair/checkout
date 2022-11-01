@@ -1,7 +1,6 @@
 package ch.zhaw.checkout.checkout;
 
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 public class FiveBucksVoucher implements Voucher {
 
