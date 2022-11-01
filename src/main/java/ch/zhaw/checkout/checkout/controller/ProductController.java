@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.zhaw.checkout.checkout.Product;
@@ -21,6 +22,16 @@ public class ProductController {
         this.products.add(new Product("id4", "Happy Day", "Lollipop", 0.8));
         this.products.add(new Product("id5", "Sweet Magic", "Lollipop", 1));
         System.out.println("Init Data");
+    }
+
+    @GetMapping("/")
+    public String ping() {
+        return "Checkout app is up and running!";
+    }
+
+    @GetMapping("/count")
+    public long count() {
+        return products.stream().count();
     }
 
 }
