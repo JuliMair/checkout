@@ -8,6 +8,7 @@ public class PercentageVoucher implements Voucher {
     static String errorMessageGreaterZero = "Error: Discount value must be greater zero.";
     static String errorMessage50 = "Error: Discount value must less or equal 50.";
 
+    /*NUR FÜR TESTZWECKE FÜR DEN GITUPLOAD */
     
     public PercentageVoucher(int discount) {
         if (discount <= 0) {
