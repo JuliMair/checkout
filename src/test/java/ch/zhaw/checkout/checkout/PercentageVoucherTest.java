@@ -14,14 +14,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class PercentageVoucherTest {
 
-    // XXX Aufgabe 6d)
+
     @Test
     public void testVoucher_withoutProducts() {
         var voucher = new PercentageVoucher(7);
         assertEquals(0, voucher.getDiscount(new ArrayList<Product>()), 0.01);
     }
 
-    // XXX Aufgabe 6d)
+
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 5, 20, 49, 50 })
     public void testVoucher_withoutProducts_multipleValues(int value) {
@@ -29,7 +29,7 @@ public class PercentageVoucherTest {
         assertEquals(0, voucher.getDiscount(new ArrayList<Product>()), 0.01);
     }
 
-    // XXX Aufgabe 6d)
+
     @Test
     public void testVoucher_withProducts() {
         var voucher = new PercentageVoucher(42);
@@ -39,7 +39,7 @@ public class PercentageVoucherTest {
         assertEquals(49.98, voucher.getDiscount(Arrays.asList(product1, product2)), 0.01);
     }
 
-    // XXX Aufgabe 7c)
+    
     @Test
     public void testVoucher_withProducts_Mock() {
         var voucher = new PercentageVoucher(42);
@@ -52,7 +52,7 @@ public class PercentageVoucherTest {
         assertEquals(49.98, voucher.getDiscount(Arrays.asList(product1, product2)), 0.01);
     }
 
-    // XXX Aufgabe 7b)
+    
     @Test
     public void testVoucher_belowOrEqualZero() {
         var exception1 = assertThrows(RuntimeException.class, () -> {
@@ -64,7 +64,7 @@ public class PercentageVoucherTest {
         assertEquals(PercentageVoucher.errorMessageGreaterZero, exception1.getMessage());
     }
 
-    // XXX Aufgabe 7b)
+
     @Test
     public void testVoucher_greater50() {
         var exception1 = assertThrows(RuntimeException.class, () -> {

@@ -20,29 +20,6 @@ public class ProductControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    // XXX Aufgabe 7h)
-    @Test
-    public void testPing() throws Exception {
-        var result = mvc.perform(get("/")
-        .contentType(MediaType.TEXT_PLAIN))
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andReturn();
-
-        assertTrue(result.getResponse().getContentAsString().contains("up and running"));
-    }
-
-    // XXX Aufgabe 7h)
-    @Test
-    public void testProductCount() throws Exception {
-        var result = mvc.perform(get("/count")
-        .contentType(MediaType.TEXT_PLAIN))
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andReturn();
-
-        assertEquals("5", result.getResponse().getContentAsString());
-    }
 
 }
     
