@@ -4,29 +4,24 @@ import java.util.List;
 
 public class PercentageVoucher implements Voucher {
 
-    private int discount;
+    private int discount = 0;
+    static String errorMessageGreaterZero = "Error: Discount value must be greater zero.";
+    static String errorMessage50 = "Error: Discount value must less or equal 50.";
 
+    // XXX Aufgabe 7a)
     public PercentageVoucher(int discount) {
-        this.discount=discount;
+        if (discount <= 0) {
+            throw new RuntimeException(errorMessageGreaterZero);
+        } else if (discount > 50) {
+            throw new RuntimeException(errorMessage50);
+        }
+        this.discount = discount;
     }
 
     @Override
     public double getDiscount(List<Product> products) {
-        if (discount > 50){
-            throw new RuntimeException("Error - Discount value must less or equal 50.");
-        } else if (discount <= 0){
-            throw new RuntimeException("Error - Discount value must be greater zero");
-        } else {
-            if (products.stream().mapToDouble(x-> x.getPrice()).sum()>0) {
-                return products.stream().mapToDouble(x-> x.getPrice()).sum()*discount/100;
-            } else {
-                return 0.0;
-            }
-        }
-        
-
-
-        
-        
+        var totalPrice = products.stream().mapToDouble(p -> p.getPrice()).sum();
+        return totalPrice * ((double) discount / 100);
     }
+
 }

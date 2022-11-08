@@ -4,21 +4,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
+
+// XXX Aufgabe 6c)
 public class FiveBucksVoucherTest {
 
     @Test
     public void testEmpty() {
-        ArrayList<Product> products = new ArrayList<Product>();
-        FiveBucksVoucher fiveBucksVoucher = new FiveBucksVoucher();
-        assertEquals(fiveBucksVoucher.getDiscount(products), 0.0);
+        var voucher = new FiveBucksVoucher();
+        assertEquals(0, voucher.getDiscount(new ArrayList<Product>()), 0.01);
+    }
+
+    @Test
+    public void testTwo() {
+        var products = new ArrayList<Product>();
+        var voucher = new FiveBucksVoucher();
+        products.add(new Product("id", "test", "test", 2));
+        assertEquals(0, voucher.getDiscount(new ArrayList<Product>()), 0.01);
     }
 
     @Test
     public void testTen() {
-        ArrayList<Product> products = new ArrayList<Product>();
-        FiveBucksVoucher fiveBucksVoucher = new FiveBucksVoucher();
-        Product pro1 = new Product("88", "Cola ", "Getränk", 10.00);
-        products.add(pro1);
-        assertEquals(fiveBucksVoucher.getDiscount(products), 5.0);
+        var voucher = new FiveBucksVoucher();
+        var products = new ArrayList<Product>();
+        products.add(new Product("id", "test", "test", 10));
+        assertEquals(5, voucher.getDiscount(products), 0.01);
     }
+
 }

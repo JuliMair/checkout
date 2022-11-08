@@ -6,33 +6,36 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.aggregator.ArgumentsAccessor;
 import org.junit.jupiter.params.provider.CsvSource;
 
+// XXX Aufgabe 6e)
 public class TwoForOneVoucherTest {
 
-
     @Test
-    public void testdiscount() {
-        ArrayList<Product> products = new ArrayList<Product>();
-        Product pro1 = new Product("88", "Cola ", "Getränk", 42.00);
-        Product pro2 = new Product("44", "Wurst", "Fleisch", 77.0);
-        products.add(pro1);
-        products.add(pro2);
-        TwoForOneVoucher twoForOneVoucher = new TwoForOneVoucher(pro1);
-        assertEquals(twoForOneVoucher.getDiscount(products), 0.0);
+    public void testOtherProduct() {
+        var product1 = new Product("id1", "name", null, 77);
+        var product2 = new Product("id2", "name", null, 77);
+
+        var voucher = new TwoForOneVoucher(product1);
+        var products = new ArrayList<Product>();
+        products.add(product1);
+        products.add(product2);
+
+        assertEquals(0, voucher.getDiscount(products), 0.01);
     }
 
     @ParameterizedTest
-    @CsvSource({"0,0", "1,0", "2,1", "3,1", "4,2"})
-    public void testdiscount2(String inputString, String expectedString){
-        int input = Integer.parseInt(inputString);
-        int expected = Integer.parseInt(expectedString);
-        ArrayList<Product> products = new ArrayList<Product>();
-        Product pro1 = new Product("88", "Cola ", "Getränk", 77.00);
-        for (int i = 0; i < input; i++) {
-            products.add(pro1);
+    @CsvSource({ "0,0", "1,0", "2,1", "3,1", "4,2" })
+    public void testMultipleProducts(ArgumentsAccessor argumentsAccessor) {
+        var product = new Product("id", "name", null, 77);
+        var voucher = new TwoForOneVoucher(product);
+        var products = new ArrayList<Product>();
+        for (var i = 0; i < argumentsAccessor.getInteger(0); i++) {
+            products.add(product);
         }
-        TwoForOneVoucher twoForOneVoucher = new TwoForOneVoucher(pro1);
-        assertEquals(twoForOneVoucher.getDiscount(products), expected * pro1.getPrice());
+        var expectedPrice = argumentsAccessor.getInteger(1) * 77;
+        assertEquals(expectedPrice, voucher.getDiscount(products), 0.01);
     }
+
 }

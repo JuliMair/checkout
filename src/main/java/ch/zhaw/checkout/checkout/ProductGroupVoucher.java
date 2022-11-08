@@ -3,31 +3,30 @@ package ch.zhaw.checkout.checkout;
 import java.util.List;
 
 public class ProductGroupVoucher implements Voucher {
-    private int discount;
-    private String productGroup;
 
-    public ProductGroupVoucher(int discount, String productGroup) {
-        this.discount = discount;
+    private String productGroup;
+    private int amount;
+    static String errorMessageProductBlank = "Error: Product group must not be blank.";
+    static String errorMessageProductNull = "Error: Product group must not be null.";
+    static String errorMessageAmount = "Error: Amount must be positive value.";
+
+    public ProductGroupVoucher(String productGroup, int amount) {
+        if (productGroup == null) {
+            throw new RuntimeException(errorMessageProductNull);
+        } else if (productGroup.isBlank()) {
+            throw new RuntimeException(errorMessageProductBlank);
+        } else if (amount <= 0) {
+            throw new RuntimeException(errorMessageAmount);
+        }
         this.productGroup = productGroup;
+        this.amount = amount;
     }
 
     @Override
-
     public double getDiscount(List<Product> products) {
-
-        long vorhanden = products.stream().filter(x -> x.getProductGroup().equals(productGroup)).count();
-
-        if (productGroup == " " || productGroup == null) {
-            throw new RuntimeException("ProdLeer");
-        } else if (products.stream().mapToDouble(x -> x.getPrice()).sum() < discount) {
-            throw new RuntimeException("Error – discount is higher than the shopping cart");
-        } else if(discount <= 0){
-            throw new RuntimeException("Error- discount can not be less than 1");
-        }else if (vorhanden > 0) {
-            return discount;
-        }
-
-        return 0;
-
+        var totalPrice = products.stream().filter(p -> this.productGroup.equals(p.getProductGroup()))
+                .mapToDouble(p -> p.getPrice()).sum();
+        return Math.min(totalPrice, this.amount);
     }
+
 }
