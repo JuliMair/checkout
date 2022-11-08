@@ -9,7 +9,7 @@ public class PercentageVoucher implements Voucher {
     static String errorMessage50 = "Error: Discount value must less or equal 50.";
 
     /*NUR FÜR TESTZWECKE FÜR DEN GITUPLOAD */
-    
+    /*zweiter Versuch */
     public PercentageVoucher(int discount) {
         if (discount <= 0) {
             throw new RuntimeException(errorMessageGreaterZero);
