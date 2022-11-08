@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 public class ProductGroupVoucherTest {
 
-    // XXX Aufgabe 7e)
+    
     @ParameterizedTest
     @ValueSource(ints = { 1, 2, 5, 20, 49, Integer.MAX_VALUE })
     public void testAmountParameter(int amount) {
@@ -22,7 +22,7 @@ public class ProductGroupVoucherTest {
         assertEquals(0, voucher.getDiscount(new ArrayList<Product>()));
     }
 
-    // XXX Aufgabe 7e)
+
     @ParameterizedTest
     @ValueSource(ints = { 0, -1, -Integer.MAX_VALUE })
     public void testAmountParameter_Error(int amount) {
@@ -32,7 +32,7 @@ public class ProductGroupVoucherTest {
         assertEquals(ProductGroupVoucher.errorMessageAmount, exception.getMessage());
     }
 
-    // XXX Aufgabe 7f)
+    
     @ParameterizedTest
     @CsvSource({ "p1,5,p1,7,p1,10,10", "p1,5,p1,3,p1,10,8", "p1,5,p2,7,p1,10,5" })
     void testProductGroupExample(ArgumentsAccessor argumentsAccessor) {

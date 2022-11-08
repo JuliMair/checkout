@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-// XXX Aufgabe 6c)
+
 public class FiveBucksVoucherTest {
 
     @Test
